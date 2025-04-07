@@ -1,12 +1,13 @@
+// components/contact-form.tsx
 'use client'
 
-import { useFormStatus, useFormState } from 'react-dom'
+import { useFormStatus } from 'react-dom' // Alterado de 'react-dom' para 'react'
 import { sendMessage } from '@/app/actions/contact'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea'
 import { toast } from 'react-hot-toast'
-import { useEffect } from 'react'
+import { useActionState, useEffect } from 'react'
 import { Loader2 } from 'lucide-react'
 
 interface FormState {
@@ -42,13 +43,13 @@ function SubmitButton() {
   )
 }
 
-export function ContactForm() {
-  const [state, formAction] = useFormState<FormState, FormData>(sendMessage, initialState)
+export default function ContactForm() {
+  const [state, formAction] = useActionState<FormState, FormData>(sendMessage, initialState)
 
   useEffect(() => {
-    if (state.success) {
+    if (state?.success) {
       toast.success(state.message || 'Mensagem enviada com sucesso!')
-    } else if (state.message && !state.success) {
+    } else if (state?.message && !state.success) {
       toast.error(state.message)
     }
   }, [state])
@@ -65,7 +66,7 @@ export function ContactForm() {
           placeholder="Seu nome completo" 
           required 
         />
-        {state.errors?.name && (
+        {state?.errors?.name && (
           <p className="text-sm text-red-500">{state.errors.name[0]}</p>
         )}
       </div>
@@ -81,7 +82,7 @@ export function ContactForm() {
           placeholder="seu@email.com" 
           required 
         />
-        {state.errors?.email && (
+        {state?.errors?.email && (
           <p className="text-sm text-red-500">{state.errors.email[0]}</p>
         )}
       </div>
@@ -97,7 +98,7 @@ export function ContactForm() {
           placeholder="Como posso te ajudar?" 
           required 
         />
-        {state.errors?.message && (
+        {state?.errors?.message && (
           <p className="text-sm text-red-500">{state.errors.message[0]}</p>
         )}
       </div>
