@@ -9,7 +9,7 @@ import ContactForm from '@/components/contact-form.tsx'
 export default function Contact() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
-      <section className="container py-16 md:py-24">
+      <section className="container py-16 md:py-24 mx-1">
         {/* Cabeçalho com animação */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -17,6 +17,8 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
+          <p className="bg-gray-400/30 w-fit rounded-md py-0 my-0 px-2"><a href="/">Voltar ao Início</a></p>
+
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Vamos Conversar</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Tem um projeto em mente ou quer saber mais sobre meus serviços? Preencha o formulário ou entre em contato diretamente.
@@ -113,7 +115,7 @@ export default function Contact() {
             >
               <Button asChild size="lg" className="w-full md:w-auto">
                 <Link
-                  href="https://cal.com/seu-link"
+                  href="https://cal.com/mateus-cassuque/meeting-de-ebertura-de-projecto"
                   target="_blank"
                   className="gap-2"
                 >
