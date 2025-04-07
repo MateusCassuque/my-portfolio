@@ -129,9 +129,10 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="text-lg text-muted-foreground my-2"
+              className="text-lg text-muted-foreground my-2 font-mono"
             >
-              Desenvolvedor web especializado em criar experiências digitais intuitivas e de alto desempenho. Combinando design elegante com funcionalidades robustas.
+              Desenvolvedor web especializado em criar experiências digitais intuitivas e de alto desempenho. Combinando design elegante com funcionalidades robustas... &nbsp;
+              <a href="/about" className='text-primary'>Saber Mais</a>
             </motion.p>
           </motion.div>
 

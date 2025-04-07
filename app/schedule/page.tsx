@@ -4,12 +4,15 @@ import { motion } from 'framer-motion'
 import { Calendar, Clock, Mail, Phone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { useState } from 'react'
 
 export default function SchedulePage() {
+  const [iframeLoaded, setIframeLoaded] = useState(false)
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/10 py-12">
       <div className="container max-w-6xl mx-auto px-4">
-        {/* Cabeçalho com animação */}
+        {/* Cabeçalho (mantido igual) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -24,7 +27,7 @@ export default function SchedulePage() {
           </p>
         </motion.div>
 
-        {/* Container principal com animação */}
+        {/* Container principal */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -32,7 +35,7 @@ export default function SchedulePage() {
           className="grid md:grid-cols-3 gap-8"
         >
           {/* Informações de contato */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.6 }}
@@ -42,7 +45,7 @@ export default function SchedulePage() {
               <Clock className="h-5 w-5 text-primary" />
               Informações Adicionais
             </h2>
-            
+
             <div className="space-y-6">
               <div className="space-y-2">
                 <h3 className="font-medium flex items-center gap-2">
@@ -81,14 +84,41 @@ export default function SchedulePage() {
             </div>
           </motion.div>
 
-          {/* Iframe do Cal.com - Parte principal */}
+
+          {/* Container do iframe com skeleton */}
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4 }}
-            className="md:col-span-2"
+            className="md:col-span-2 relative"
           >
-            <div className="bg-card rounded-xl border border-border/50 shadow-lg overflow-hidden">
+            {/* Skeleton Loading */}
+            {!iframeLoaded && (
+              <div className="bg-card rounded-xl border border-border/50 shadow-lg overflow-hidden h-[700px]">
+                <div className="animate-pulse h-full flex flex-col">
+                  <div className="h-16 bg-muted/50 rounded-t-xl"></div>
+                  <div className="flex-1 p-4 space-y-4">
+                    <div className="h-10 bg-muted/30 rounded-md"></div>
+                    <div className="grid grid-cols-7 gap-2">
+                      {[...Array(7)].map((_, i) => (
+                        <div key={i} className="h-8 bg-muted/20 rounded"></div>
+                      ))}
+                    </div>
+                    <div className="grid grid-cols-7 gap-2 mt-4">
+                      {[...Array(42)].map((_, i) => (
+                        <div
+                          key={i}
+                          className="aspect-square bg-muted/10 rounded-md"
+                        ></div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Iframe do Cal.com */}
+            <div className={`bg-card rounded-xl border border-border/50 shadow-lg overflow-hidden ${!iframeLoaded ? 'absolute inset-0 invisible' : 'block'}`}>
               <iframe
                 src="https://cal.com/mateus-cassuque/meeting-de-ebertura-de-projecto?embed=true"
                 width="100%"
@@ -98,6 +128,7 @@ export default function SchedulePage() {
                   border: 'none',
                   background: 'transparent'
                 }}
+                onLoad={() => setIframeLoaded(true)}
                 loading="eager"
               ></iframe>
             </div>
