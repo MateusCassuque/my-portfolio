@@ -8,9 +8,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db-mdev":"npx prisma migrate dev",
-    "db-gnt":"npx prisma generate",
-    "db-studio":"npx prisma studio"
+    "db-mdev": "npx prisma migrate dev",
+    "db-gnt": "npx prisma generate",
+    "db-studio": "npx prisma studio"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -43,6 +43,7 @@
     "@radix-ui/react-toggle": "^1.1.2",
     "@radix-ui/react-toggle-group": "^1.1.2",
     "@radix-ui/react-tooltip": "^1.1.8",
+    "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",

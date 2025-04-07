@@ -1,34 +1,32 @@
-// app/components/contact-form.tsx
-'use client';
+'use client'
 
-import { useFormStatus, useFormState } from 'react-dom';
-import { sendMessage } from '@/app/actions/contact';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Textarea } from './ui/textarea';
-import { toast } from 'react-hot-toast';
-import { useEffect } from 'react';
-import { Loader2 } from 'lucide-react';
+import { useFormStatus, useFormState } from 'react-dom'
+import { sendMessage } from '@/app/actions/contact'
+import { Button } from './ui/button'
+import { Input } from './ui/input'
+import { Textarea } from './ui/textarea'
+import { toast } from 'react-hot-toast'
+import { useEffect } from 'react'
+import { Loader2 } from 'lucide-react'
 
-// Definimos o tipo do estado inicial
 interface FormState {
-  success: boolean;
-  message: string;
+  success: boolean
+  message: string
   errors?: {
-    name?: string[];
-    email?: string[];
-    message?: string[];
-  };
+    name?: string[]
+    email?: string[]
+    message?: string[]
+  }
 }
 
 const initialState: FormState = {
   success: false,
   message: '',
   errors: undefined
-};
+}
 
 function SubmitButton() {
-  const { pending } = useFormStatus();
+  const { pending } = useFormStatus()
   
   return (
     <Button type="submit" className="w-full" disabled={pending}>
@@ -41,19 +39,19 @@ function SubmitButton() {
         'Enviar mensagem'
       )}
     </Button>
-  );
+  )
 }
 
 export function ContactForm() {
-  const [state, formAction] = useFormState<FormState, FormData>(sendMessage, initialState);
+  const [state, formAction] = useFormState<FormState, FormData>(sendMessage, initialState)
 
   useEffect(() => {
     if (state.success) {
-      toast.success(state.message || 'Mensagem enviada com sucesso!');
+      toast.success(state.message || 'Mensagem enviada com sucesso!')
     } else if (state.message && !state.success) {
-      toast.error(state.message);
+      toast.error(state.message)
     }
-  }, [state]);
+  }, [state])
 
   return (
     <form action={formAction} className="space-y-6">
@@ -106,5 +104,5 @@ export function ContactForm() {
       
       <SubmitButton />
     </form>
-  );
+  )
 }

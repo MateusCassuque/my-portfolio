@@ -10,11 +10,14 @@ datasource db {
 
 model Message {
   id        Int      @id @default(autoincrement())
-  name      String
+  name      String   @map("name") // Garantindo que o campo name seja mapeado corretamente
   email     String
-  content   String
+  content   String   @map("message") // Mapeando o campo 'content' para 'message' no banco
   read      Boolean  @default(false)
   createdAt DateTime @default(now())
+
+  // Adicione isso para manter a compatibilidade
+  @@map("messages")
 }
 
 model Admin {

@@ -1,15 +1,13 @@
-// app/actions/contact.ts
 'use server'
 
 import { z } from 'zod'
-import  prisma  from '@/lib/db'
+import { prisma } from '@/lib/db'
 import { revalidatePath } from 'next/cache'
 
-// Esquema de validação
 const schema = z.object({
-  name: z.string().min(3, 'O nome deve ter pelo menos 3 caracteres'),
-  email: z.string().email('Por favor, insira um email válido'),
-  message: z.string().min(10, 'A mensagem deve ter pelo menos 10 caracteres'),
+  name: z.string().min(3),
+  email: z.string().email(),
+  message: z.string().min(10)
 })
 
 export async function sendMessage(
@@ -19,20 +17,24 @@ export async function sendMessage(
   const validatedFields = schema.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),
-    message: formData.get('message'),
+    message: formData.get('message')
   })
 
   if (!validatedFields.success) {
     return {
       success: false,
       message: 'Por favor, corrija os erros no formulário',
-      errors: validatedFields.error.flatten().fieldErrors,
+      errors: validatedFields.error.flatten().fieldErrors
     }
   }
 
   try {
     await prisma.message.create({
-      data: validatedFields.data,
+      data: {
+        name: validatedFields.data.name,
+        email: validatedFields.data.email,
+        content: validatedFields.data.message // Usando o campo correto do schema
+      }
     })
 
     revalidatePath('/admin/dashboard')
@@ -44,12 +46,11 @@ export async function sendMessage(
     console.error('Erro ao enviar mensagem:', error)
     return {
       success: false,
-      message: 'Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.',
+      message: 'Ocorreu um erro ao enviar sua mensagem'
     }
   }
 }
 
-// Definindo o tipo FormState para a action
 interface FormState {
   success: boolean
   message: string

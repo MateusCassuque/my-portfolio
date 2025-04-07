@@ -1,10 +1,10 @@
 'use client'
 
-import { ArrowRight, Github, Linkedin, Mail, Calendar } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { ArrowRight, Github, Linkedin, Mail, Calendar } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 export default function Home() {
   return (
@@ -17,7 +17,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="text-4xl md:text-6xl font-bold"
           >
-            Transformando ideias em <span className="text-primary">realidade digital</span>
+            Transformando Ideias em <span className="text-primary">Realidade Digital</span>
           </motion.h1>
           
           <motion.p
@@ -26,7 +26,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg text-muted-foreground"
           >
-            Desenvolvedor web especializado em criar experiências digitais intuitivas e de alto desempenho. Combinando design elegante com funcionalidades robustas.
+            Desenvolvedor web especializado em criar experiências digitais intuitivas e de alto desempenho
           </motion.p>
           
           <motion.div
@@ -85,5 +85,5 @@ export default function Home() {
         </div>
       </footer>
     </main>
-  );
+  )
 }
