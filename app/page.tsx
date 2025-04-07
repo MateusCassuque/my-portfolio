@@ -149,7 +149,7 @@ export default function Home() {
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="gap-2 w-full sm:w-fit">
-              <Link href="https://cal.com/mateus-cassuque/meeting-de-ebertura-de-projecto" target="_blank">
+              <Link href="/schedule">
                 <Calendar size={18} />
                 Agendar reunião
               </Link>

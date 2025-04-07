@@ -49,7 +49,7 @@ export default function SchedulePage() {
                   <Calendar className="h-4 w-4 text-primary" />
                   Duração
                 </h3>
-                <p className="text-muted-foreground text-sm">30 minutos</p>
+                <p className="text-muted-foreground text-sm">45 minutos - 1 hora</p>
               </div>
 
               <div className="space-y-2">
@@ -59,13 +59,13 @@ export default function SchedulePage() {
                 </h3>
                 <div className="flex flex-col gap-2">
                   <Button asChild variant="outline" className="justify-start gap-2">
-                    <Link href="mailto:seu@email.com">
+                    <Link href="mailto:mateusAbril4@gmail.com">
                       <Mail className="h-4 w-4" />
                       Enviar Email
                     </Link>
                   </Button>
                   <Button asChild variant="outline" className="justify-start gap-2">
-                    <Link href="tel:+5511999999999">
+                    <Link href="tel:+244935044500">
                       <Phone className="h-4 w-4" />
                       Ligar Agora
                     </Link>
