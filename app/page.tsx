@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
-import { ArrowRight, Github, Linkedin, Mail, Calendar, Code, Cpu, Layers, Database } from 'lucide-react'
+import { ArrowRight, Github, Linkedin, Mail, Calendar, Code, Cpu, Layers, Database, Facebook } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -204,19 +204,26 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex gap-4 text-primary">
           <Button variant="ghost" size="icon" asChild className="hover:bg-primary/10">
-            <Link href="https://github.com" target="_blank" aria-label="GitHub">
+            <Link href="https://github.com/MateusCassuque" target="_blank" aria-label="GitHub">
               <Github className="h-5 w-5" />
             </Link>
           </Button>
           <Button variant="ghost" size="icon" asChild className="hover:bg-primary/10">
-            <Link href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+            <Link href="https://www.linkedin.com/in/mateus-cassuque-729a76345/?trk=opento_sprofile_goalscard" target="_blank" aria-label="LinkedIn">
               <Linkedin className="h-5 w-5" />
             </Link>
           </Button>
-          <Button variant="ghost" size="icon" asChild className="hover:bg-primary/10 md:hidden">
-            <Link href="mailto:seu@email.com" aria-label="Email">
+
+          <Button variant="ghost" size="icon" asChild className="hover:bg-primary/10">
+            <Link href="https://www.facebook.com/profile.php?id=61560957432070" aria-label="Email">
+              <Facebook className="h-5 w-5" />
+            </Link>
+          </Button>
+
+          <Button variant="ghost" size="icon" asChild className="hover:bg-primary/10">
+            <Link href="mailto:mateusAbril4@gmail.com" aria-label="Email">
               <Mail className="h-5 w-5" />
             </Link>
           </Button>
