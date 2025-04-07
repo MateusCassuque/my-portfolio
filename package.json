@@ -1,15 +1,20 @@
 {
   "name": "my-portfolio",
+  "description": "Meu site pessol - Mateus F.L. Cassuque",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db-mdev":"npx prisma migrate dev",
+    "db-gnt":"npx prisma generate",
+    "db-studio":"npx prisma studio"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
+    "@next-auth/prisma-adapter": "^1.0.7",
     "@prisma/client": "^6.5.0",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-alert-dialog": "^1.1.6",
