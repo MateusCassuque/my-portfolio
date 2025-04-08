@@ -64,7 +64,7 @@ export default function LoginPage() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="relative aspect-square rounded-full overflow-hidden border-8 border-background shadow-xl bg-[url(/images/logo1.png)]"
+          className="relative aspect-square rounded-sm overflow-hidden border-8 border-background shadow-xl bg-[url(/images/logo1.png)] bg-center bg-no-repeat"
         >
           {/* <Image
             src="/images/logo1.png"
@@ -122,7 +122,7 @@ export default function LoginPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className='flex items-center justify-between'>
-            <Link href={"#"} className='flex text-primary'><Lock className='h-5 w-5' /> &nbsp; Não tenho Conta</Link>
+            <Link href={"/register"} className='flex text-primary'><Lock className='h-5 w-5' /> &nbsp; Não tenho Conta</Link>
             <Link href={"/"} className='flex text-primary'><ArrowLeft className='h-5 w-5' /> &nbsp; Voltar</Link>
           </motion.div>
         </Form>
