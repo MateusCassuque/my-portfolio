@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
+import PortfolioPage from '@/components/portifolio'
 
 export default function Home() {
   return (
@@ -188,6 +189,15 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </section>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.5 }}
+      // className="absolute bottom-13 left-8 sm:bottom-10 sm:left-35 bg-background/90 backdrop-blur px-4 py-2 rounded-full border border-primary/20 shadow-sm"
+      >
+        <PortfolioPage />
+      </motion.div>
 
       {/* Rodapé com senso de urgência */}
       <motion.footer
