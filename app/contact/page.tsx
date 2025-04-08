@@ -109,10 +109,9 @@ export default function Contact() {
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="pt-4"
+              className="flex flex-wrap gap-4 pt-6"
             >
-              <div className="flex items-center justify-center">
-                <Button asChild size="lg" className="w-full md:w-auto">
+                <Button asChild size="lg" className="w-full sm:w-fit">
                   <Link
                     href="/schedule"
                     className="gap-2"
@@ -122,16 +121,15 @@ export default function Contact() {
                   </Link>
                 </Button>
 
-                <Button asChild size="lg" variant={'outline'} className="w-full md:w-auto">
+                <Button asChild size="lg" variant={'outline'} className="w-full sm:w-fit">
                   <Link
                     href="/"
-                    className="gap-2 mx-4"
+                    className="gap-2"
                   >
                     <ArrowBigLeft className="h-4 w-4" />
                     Voltar
                   </Link>
                 </Button>
-              </div>
 
             </motion.div>
           </motion.div>

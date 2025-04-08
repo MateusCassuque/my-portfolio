@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation'
-import { ArrowRight, Github, Linkedin, Mail, Calendar, Code, Cpu, Layers, Database, Facebook } from 'lucide-react'
+import { ArrowRight, Github, Linkedin, Mail, Calendar, Code, Cpu, Layers, Database, Facebook, LogIn } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -149,6 +149,7 @@ export default function Home() {
                 Vamos conversar
               </Link>
             </Button>
+
             <Button asChild variant="outline" size="lg" className="gap-2 w-full sm:w-fit">
               <Link href="/schedule">
                 <Calendar size={18} />
@@ -217,7 +218,7 @@ export default function Home() {
           </Button>
 
           <Button variant="ghost" size="icon" asChild className="hover:bg-primary/10">
-            <Link href="https://www.facebook.com/profile.php?id=61560957432070" aria-label="Email">
+            <Link href="https://www.facebook.com/profile.php?id=61560957432070" aria-label="Facebook">
               <Facebook className="h-5 w-5" />
             </Link>
           </Button>
@@ -225,6 +226,12 @@ export default function Home() {
           <Button variant="ghost" size="icon" asChild className="hover:bg-primary/10">
             <Link href="mailto:mateusAbril4@gmail.com" aria-label="Email">
               <Mail className="h-5 w-5" />
+            </Link>
+          </Button>
+
+          <Button variant="ghost" size="icon" asChild className="hover:bg-primary/10">
+            <Link href="/login" aria-label="Login">
+              <LogIn className="h-5 w-5" />
             </Link>
           </Button>
         </div>
