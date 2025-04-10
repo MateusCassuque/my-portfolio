@@ -1,0 +1,136 @@
+// components/NotificationBell.tsx
+
+'use client';
+
+import { Bell, BellOff, Clock } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useEffect, useState } from 'react';
+import useNotificationStore from '@/store/notificationStore';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import Link from 'next/link';
+
+interface NotificationBellProps {
+  userId: string;
+}
+
+const NotificationBell = ({ userId }: NotificationBellProps) => {
+  const {
+    notifications,
+    fetchNotifications,
+    markAsRead,
+    listenForUpdates,
+  } = useNotificationStore();
+
+  const [open, setOpen] = useState(false);
+
+  // Busca as notificações ao carregar o componente
+  useEffect(() => {
+    fetchNotifications(userId);
+  }, [userId, fetchNotifications]);
+
+  // Inicia a conexão SSE para ouvir atualizações em tempo real
+  useEffect(() => {
+    const cleanup = listenForUpdates(userId);
+
+    // Fecha a conexão ao desmontar o componente
+    return () => {
+      if (typeof cleanup === 'function') {
+        cleanup();
+      }
+    };
+  }, [userId, listenForUpdates]);
+
+  // Marca uma notificação como lida
+  const handleMarkAsRead = (id: number) => {
+    markAsRead(id);
+  };
+
+  const unreadCount = notifications.filter((n) => !n.visto).length;
+
+  return (
+    <div className="flex items-center gap-4">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <div className="flex items-center">
+            {unreadCount > 0 && (
+              <div className="">
+                <span className="bg-primary text-white text-xs rounded-full px-1.5 py-0.5">
+                  {unreadCount}
+                </span>
+              </div>
+            )}
+
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setOpen(!open)}
+            >
+              {unreadCount > 0 ? <Bell className="h-5 w-5" /> : <BellOff className="h-5 w-5" />}
+            </Button>
+          </div>
+        </DropdownMenuTrigger>
+
+        <DropdownMenuContent align="center" className="h-[650px] overflow-y-auto">
+          <DropdownMenuLabel>Notificações do Usuário</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+
+          {/* Lista de notificações */}
+          <div className="mt-2">
+            {notifications.map((notification) => (
+              <DropdownMenuItem key={notification.id}>
+                <div className="w-[300px] border-b-1">
+                  <Link
+                    href={`/news/${notification.eventId}`}
+                    onClick={() => {
+                      if (!notification.visto) {
+                        handleMarkAsRead(notification.id);
+                      }
+                    }}
+                  >
+                    <div
+                      className={
+                        !notification.visto
+                          ? 'bg-slate-500/25 flex items-center shadow-md p-2 rounded-md'
+                          : 'flex items-center shadow-md p-2 rounded-md'
+                      }
+                    >
+                      <div className="mx-2 text-primary">
+                        {!notification.visto ? (
+                          <Bell className="h-6 w-6" />
+                        ) : (
+                          <BellOff className="h-6 w-6" />
+                        )}
+                      </div>
+                      <div className="">
+                        <p className="text-justify">{notification.mensagem}</p>
+                        <p className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Clock className="w-4 h-4" />
+                          <span>
+                            {notification.updatedAt?.toLocaleDateString('pt-BR', {
+                              day: '2-digit',
+                              month: 'long',
+                              year: 'numeric',
+                            })}
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              </DropdownMenuItem>
+            ))}
+          </div>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  );
+};
+
+export default NotificationBell;
