@@ -30,19 +30,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <MySessionProvider>
-          <ThemeProvider
-            defaultTheme="light"
-            enableSystem
-            attribute="class"
-          // disableTransitionOnChange
-          >
+        <ThemeProvider
+          defaultTheme="light"
+          enableSystem
+          attribute="class"
+        // disableTransitionOnChange
+        >
+          <MySessionProvider>
 
-            <Header/>
+            <Header />
             {children}
 
-          </ThemeProvider>
-        </MySessionProvider>
+          </MySessionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

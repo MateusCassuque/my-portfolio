@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { signOut, useSession } from "next-auth/react"
 import { useTheme } from 'next-themes'
-import { Sun, Moon, User, LogIn } from 'lucide-react'
+import { Sun, Moon, User, LogIn, UserCheck } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
@@ -27,7 +27,7 @@ export const DropMenu: React.FC = () => {
             <Button variant="ghost" size="icon" className="rounded-full">
               <Avatar>
                 <AvatarImage src={session.data?.user?.image ? session.data?.user.image : "/placeholder.svg"} alt="AvatarLogo" />
-                <AvatarFallback>HNB</AvatarFallback>
+                <AvatarFallback> <UserCheck className="w-5 h-5"/> </AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>

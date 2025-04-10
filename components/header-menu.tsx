@@ -26,9 +26,9 @@ export default function Header() {
           <Link href="/" className="flex mx-2 items-center gap-2">
             {/* <Newspaper className="w-6 h-6 text-primary" /> */}
             <p className="text-3xl font-bold font-serif shadow-lg px-4 rounded-md">
-              <span className="text-red-500">H</span>
-              <span className="text-green-600">N</span>
-              <span className='text-primary'>B</span>
+              <span className="text-red-500">M</span>
+              <span className='text-primary'>.</span>
+              <span className="text-green-600">C</span>
             </p>
           </Link>
         </div>
