@@ -1,7 +1,7 @@
 'use server'
 
 import { z } from 'zod'
-import { prisma } from '@/lib/db'
+import  prisma  from '@/lib/db'
 import { revalidatePath } from 'next/cache'
 
 const schema = z.object({

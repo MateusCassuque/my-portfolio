@@ -2,6 +2,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getToken } from 'next-auth/jwt'
+import prisma from '@/lib/db'
 
 // Configuração para matcher (opcional)
 export const config = {
@@ -21,7 +22,8 @@ export const config = {
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const session = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })
+  // const session = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })
+  const session = process.env.NODE_ENV === 'production' ? request.cookies.get('__Secure-next-auth.session-token') : request.cookies.get('next-auth.session-token')
 
   // Bloqueia acesso à página de registro em produção
   if (process.env.NODE_ENV === 'production' && pathname === '/register') {
@@ -35,10 +37,11 @@ export async function middleware(request: NextRequest) {
     }
 
     // Verificação adicional para garantir que é um admin
-    const isAdmin = await verifyAdmin(session.sub)
-    if (!isAdmin) {
-      return NextResponse.redirect(new URL('/unauthorized', request.url))
-    }
+    // const isAdmin = await verifyAdmin(session.)
+    // console.log(session.sub)
+    // if (!isAdmin) {
+    //   return NextResponse.redirect(new URL('/unauthorized', request.url))
+    // }
   }
 
   // Protege a rota de login admin
@@ -54,7 +57,6 @@ async function verifyAdmin(userId: string | undefined) {
   if (!userId) return false
 
   try {
-    const { prisma } = await import('@/lib/db')
     const admin = await prisma.admin.findUnique({
       where: { id: parseInt(userId) }
     })
