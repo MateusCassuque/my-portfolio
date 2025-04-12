@@ -121,7 +121,7 @@ export default function LoginPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className='flex items-center justify-between my-5'>
-            <Link href={"/register"} className='flex text-primary'><Lock className='h-5 w-5' /> &nbsp; Não tenho Conta</Link>
+            <Link href={"/auth/register"} className='flex text-primary'><Lock className='h-5 w-5' /> &nbsp; Não tenho Conta</Link>
             <Link href={"/"} className='flex text-primary'><ArrowLeft className='h-5 w-5' /> &nbsp; Voltar</Link>
           </motion.div>
         </Form>
