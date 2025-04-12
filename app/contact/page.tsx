@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Backpack, ArrowBigLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import ContactForm from '@/components/contact-form.tsx'
+import ContactForm from '@/components/contact-form'
 
 export default function Contact() {
   return (
