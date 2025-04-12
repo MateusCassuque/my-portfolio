@@ -41,7 +41,7 @@ export default function RegisterPage() {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       // Verificação da chave secreta (substitua pela sua lógica)
-      if (values.secretKey !== process.env.NEXT_PUBLIC_ADMIN_SECRET) {
+      if (values.secretKey !== process.env.ADMIN_S) {
         throw new Error('Chave secreta inválida')
       }
 
