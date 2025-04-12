@@ -26,14 +26,14 @@ export async function middleware(request: NextRequest) {
   const session = process.env.NODE_ENV === 'production' ? request.cookies.get('__Secure-next-auth.session-token') : request.cookies.get('next-auth.session-token')
 
   // Bloqueia acesso à página de registro em produção
-  if (process.env.NODE_ENV === 'production' && pathname === '/register') {
+  if (process.env.NODE_ENV === 'production' && pathname === '/auth/register') {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
   // Protege todas as rotas admin/*
   if (pathname.startsWith('/admin')) {
     if (!session) {
-      return NextResponse.redirect(new URL('/login', request.url))
+      return NextResponse.redirect(new URL('/auth/login', request.url))
     }
 
     // Verificação adicional para garantir que é um admin
@@ -45,7 +45,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // Protege a rota de login admin
-  if (pathname === '/login' && session) {
+  if (pathname === '/auth/login' && session) {
     return NextResponse.redirect(new URL('/admin/dashboard', request.url))
   }
 

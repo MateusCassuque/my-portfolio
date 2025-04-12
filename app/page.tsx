@@ -240,7 +240,7 @@ export default function Home() {
           </Button>
 
           <Button variant="ghost" size="icon" asChild className="hover:bg-primary/10">
-            <Link href="/login" aria-label="Login">
+            <Link href="/auth/login" aria-label="Login">
               <LogIn className="h-5 w-5" />
             </Link>
           </Button>
