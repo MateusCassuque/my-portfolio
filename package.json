@@ -10,7 +10,9 @@
     "lint": "next lint",
     "db-mdev": "npx prisma migrate dev",
     "db-gnt": "npx prisma generate",
-    "db-studio": "npx prisma studio"
+    "db-studio": "npx prisma studio",
+    "postinstall": "prisma generate"
+
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
