@@ -4,19 +4,21 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { toast } from 'react-hot-toast'
-import { Loader2 } from 'lucide-react'
+import { Loader2, LockOpen } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { 
-  Form, 
-  FormControl, 
-  FormField, 
-  FormItem, 
-  FormLabel, 
-  FormMessage 
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
 } from '@/components/ui/form'
 import { motion } from 'framer-motion'
+import { toast } from 'sonner'
+import { useState } from 'react'
+import Link from 'next/link'
 
 // Esquema de validação
 const formSchema = z.object({
@@ -29,6 +31,8 @@ const formSchema = z.object({
 
 export default function RegisterPage() {
   const router = useRouter()
+  const [loading, setLoading] = useState(false)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,11 +42,13 @@ export default function RegisterPage() {
     }
   })
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmitForm = async (values: z.infer<typeof formSchema>) => {
     try {
+      setLoading(true)
       // Verificação da chave secreta (substitua pela sua lógica)
-      if (values.secretKey !== process.env.ADMIN_S) {
-        throw new Error('Chave secreta inválida')
+      if (values.secretKey != process.env.NEXT_PUBLIC_ADMIN_S) {
+        setLoading(false)
+        return toast.error('Chave secreta inválida')
       }
 
       const response = await fetch('/api/register', {
@@ -57,13 +63,15 @@ export default function RegisterPage() {
       })
 
       if (!response.ok) {
-        throw new Error(await response.text())
+        return toast.error(await response.text())
       }
 
+      setLoading(false)
       toast.success('Admin registrado com sucesso!')
       router.push('/admin/dashboard')
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Erro ao registrar')
+      setLoading(false)
+      toast.error('Erro ao registrar' + error)
     }
   }
 
@@ -83,7 +91,7 @@ export default function RegisterPage() {
         </div>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmitForm)} className="space-y-6">
             <FormField
               control={form.control}
               name="username"
@@ -126,8 +134,8 @@ export default function RegisterPage() {
               )}
             />
 
-            <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-              {form.formState.isSubmitting ? (
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Registrando...
@@ -138,6 +146,13 @@ export default function RegisterPage() {
             </Button>
           </form>
         </Form>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className='flex items-center justify-between my-5'>
+          <Link href={"/auth/register"} className='flex text-primary'><LockOpen className='h-5 w-5' /> &nbsp; Voltar ao LogIn</Link>
+        </motion.div>
       </motion.div>
     </div>
   )

@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/header-menu";
 import { ThemeProvider } from "next-themes";
 import MySessionProvider from "@/provider/session";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +32,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider
-          defaultTheme="light"
           enableSystem
           attribute="class"
         // disableTransitionOnChange
@@ -40,7 +40,7 @@ export default function RootLayout({
 
             <Header />
             {children}
-
+            <Toaster richColors position="top-center" /> {/* Configuração do Toaster */}
           </MySessionProvider>
         </ThemeProvider>
       </body>
