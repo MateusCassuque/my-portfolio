@@ -50,11 +50,11 @@ export const DropMenu: React.FC = () => {
               )}
             </DropdownMenuItem>
             
-            <DropdownMenuLabel>Conta</DropdownMenuLabel>
-            <DropdownMenuSeparator />
             {/* <DropdownMenuItem>Settings</DropdownMenuItem> */}
             {session.data?.user?.id && (
               <>
+              <DropdownMenuLabel>Conta</DropdownMenuLabel>
+              <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <Link href={`/auth/dashboard/`}>
                     <div className="flex">
@@ -74,14 +74,14 @@ export const DropMenu: React.FC = () => {
               </>
             )}
 
-            {!session.data?.user?.id && (
+            {/* {!session.data?.user?.id && (
               <Link href={'/user'}>
                 <DropdownMenuItem>
                   <LogIn className="w-4 h-4 mr-2" />
                   Entrar
                 </DropdownMenuItem>
               </Link>
-            )}
+            )} */}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

@@ -1,19 +1,29 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { Code, Cpu, Database, Layers, Rocket, Briefcase, Award, Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import Image from 'next/image'
+import { useRef } from 'react'
 
 export default function AboutPage() {
+  const titleRef = useRef(null)
+  const LeftRef = useRef(null)
+  const RightRef = useRef(null)
+
+  // Verifica se os elementos estão visíveis
+  const isTitleInView = useInView(titleRef, { once: true, margin: "-100px" })
+  const isLeftInView = useInView(LeftRef, { once: true, margin: "-100px" })
+  const isRightInView = useInView(RightRef, { once: true, margin: "-100px" })
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/10 py-12">
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted/10">
       <div className="container max-w-6xl mx-auto px-4">
         {/* Cabeçalho com animação */}
         <motion.div
+          ref={titleRef}
+          animate={isTitleInView ? { opacity: 1, y: 0 } : {}}
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
@@ -29,8 +39,9 @@ export default function AboutPage() {
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Seção de texto e experiência */}
           <motion.div
+            ref={LeftRef}
+            animate={isLeftInView ? { opacity: 1, x: 0 } : {}}
             initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
             className="space-y-8"
           >
@@ -67,9 +78,9 @@ export default function AboutPage() {
                   }
                 ].map((item, index) => (
                   <motion.div
+                    animate={{ opacity: 1, y: 0 }}
                     key={index}
                     initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 + index * 0.1 }}
                     className="border-l-2 border-primary pl-4 py-2"
                   >
@@ -95,13 +106,14 @@ export default function AboutPage() {
 
           {/* Seção técnica com animação */}
           <motion.div
+            ref={RightRef}
             initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
+            animate={isRightInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.6 }}
             className="bg-card p-8 rounded-xl border border-border/50 shadow-sm"
           >
             <h2 className="text-2xl font-semibold mb-6">Stack Técnica</h2>
-            
+
             {/* Habilidades principais */}
             <div className="space-y-6">
               <div>

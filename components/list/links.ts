@@ -19,7 +19,7 @@ export const menuList = [
   },
   
   {
-    texto: 'Painel',
+    texto: 'Admin',
     link: '/admin/dashboard'
   },
 ]

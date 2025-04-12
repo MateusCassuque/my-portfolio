@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
 import { TypeAnimation } from 'react-type-animation'
 import { ArrowRight, Github, Linkedin, Mail, Calendar, Code, Cpu, Layers, Database, Facebook, LogIn } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -8,11 +9,20 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
 import PortfolioPage from '@/components/portifolio'
+import AboutPage from './about/page'
 
 export default function Home() {
+  // Referências para as seções
+  const aboutRef = useRef(null)
+  const portfolioRef = useRef(null)
+
+  // Verifica se os elementos estão visíveis
+  const isAboutInView = useInView(aboutRef, { once: true, margin: "-100px" })
+  const isPortfolioInView = useInView(portfolioRef, { once: true, margin: "-100px" })
+ 
   return (
     <main className="min-h-screen p-8 md:p-24 bg-gradient-to-b from-background to-muted/10">
-      <section className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+      <section className="min-h-screen max-w-6xl mx-auto grid md:grid-cols-2 gap-16 ">
         {/* Seção de texto - Versão refinada */}
         <div className="space-y-8">
           {/* Cabeçalho com animação combinada */}
@@ -120,9 +130,9 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="text-3xl md:text-4xl font-bold leading-tight mt-4"
+              className="text-xl md:text-2xl font-bold leading-tight my-4"
             >
-              Transformando ideias em <span className="text-primary">Realidade digital</span>
+              Transformando ideias em <br /> <span className="text-primary">Realidade digital</span>
             </motion.h2>
 
             {/* ADIÇÃO: Descrição profissional completa */}
@@ -130,10 +140,10 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="text-lg text-muted-foreground my-2 font-mono"
+              className="text-muted-foreground my-2 font-mono"
             >
-              Desenvolvedor web especializado em criar experiências digitais intuitivas e de alto desempenho. Combinando design elegante com funcionalidades robustas... &nbsp;
-              <a href="/about" className='text-primary'>Saber Mais</a>
+              Desenvolvedor web especializado em criar experiências digitais intuitivas e de alto desempenho. Combinando design elegante com funcionalidades robustas. &nbsp;
+              {/* <a href="/about" className='text-primary'>Saber Mais</a> */}
             </motion.p>
           </motion.div>
 
@@ -190,21 +200,33 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5 }}
-      // className="absolute bottom-13 left-8 sm:bottom-10 sm:left-35 bg-background/90 backdrop-blur px-4 py-2 rounded-full border border-primary/20 shadow-sm"
-      >
-        <PortfolioPage />
-      </motion.div>
+      <section>
+        <motion.div
+          ref={aboutRef}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isAboutInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <AboutPage />
+        </motion.div>
+
+        <motion.div
+          ref={portfolioRef}
+          initial={{ opacity: 0, y: 20 }}
+          animate={isPortfolioInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <PortfolioPage />
+        </motion.div>
+      </section>
+
 
       {/* Rodapé com senso de urgência */}
       <motion.footer
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8 }}
-        className="mt-32 border-t border-border/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
+        className="mt-16 border-t border-border/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
       >
         <div className="text-center md:text-left">
           <p className="text-sm text-muted-foreground">

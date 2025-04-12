@@ -25,10 +25,10 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex mx-2 items-center gap-2">
             {/* <Newspaper className="w-6 h-6 text-primary" /> */}
-            <p className="text-3xl font-bold font-serif shadow-lg px-4 rounded-md">
-              <span className="text-red-500">M</span>
-              <span className='text-primary'>.</span>
-              <span className="text-green-600">C</span>
+            <p className="font-bold text-primary shadow-lg px-4 rounded-md">
+              <span className="">M</span>ateus
+              &nbsp;
+              <span className="">C</span>assuque
             </p>
           </Link>
         </div>

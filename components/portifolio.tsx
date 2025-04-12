@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Code, Star, GitFork, Globe, Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 
 interface GitHubRepo {
   id: number
@@ -18,7 +18,13 @@ interface GitHubRepo {
   updated_at: string
 }
 
+
 export default function PortfolioPage() {
+  const titleRef = useRef(null)
+
+  // Verifica se os elementos estão visíveis
+  const isTitleInView = useInView(titleRef, { once: true, margin: "-100px" })
+
   const [repos, setRepos] = useState<GitHubRepo[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -55,11 +61,12 @@ export default function PortfolioPage() {
   }
 
   return (
-    <div className="pt-24">
+    <div className="pt-5">
       <div className="container max-w-6xl mx-auto px-4">
         <motion.div
+          ref={titleRef}
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={isTitleInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
