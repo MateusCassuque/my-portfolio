@@ -27,7 +27,7 @@ export const DropMenu: React.FC = () => {
             <Button variant="ghost" size="icon" className="rounded-full">
               <Avatar>
                 <AvatarImage src={session.data?.user?.image ? session.data?.user.image : "/placeholder.svg"} alt="AvatarLogo" />
-                <AvatarFallback> <UserCheck className="w-5 h-5"/> </AvatarFallback>
+                <AvatarFallback> <Sun className="w-5 h-5"/> </AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
