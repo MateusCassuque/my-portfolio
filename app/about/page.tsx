@@ -52,7 +52,7 @@ export default function AboutPage() {
                 Minha Trajetória
               </h2>
               <p className="text-muted-foreground">
-                Como desenvolvedor Full Stack com mais de X anos de experiência, tenho ajudado empresas a transformar suas ideias em produtos digitais robustos e escaláveis.
+                Como desenvolvedor Full Stack com mais de 4 anos de experiência, tenho ajudado empresas a transformar suas ideias em produtos digitais robustos e escaláveis.
               </p>
             </div>
 
