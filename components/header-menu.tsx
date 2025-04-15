@@ -23,14 +23,14 @@ export default function Header() {
           <TooggleMenu />
 
           {/* Logo */}
-          <Link href="/" className="flex mx-2 items-center gap-2">
-            {/* <Newspaper className="w-6 h-6 text-primary" /> */}
+          {/* <Link href="/" className="flex mx-2 items-center gap-2">
+            <Newspaper className="w-6 h-6 text-primary" />
             <p className="font-bold text-primary shadow-lg px-4 rounded-md">
               <span className="">M</span>ateus
               &nbsp;
               <span className="">C</span>assuque
             </p>
-          </Link>
+          </Link> */}
         </div>
 
         {/* Menu Desktop */}
