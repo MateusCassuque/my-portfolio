@@ -17,6 +17,7 @@ import { Calendar } from './ui/calendar'
 import { useState } from 'react'
 import { Badge } from './ui/badge'
 import DataTable from './ui/data-table'
+import Link from 'next/link'
 
 type MessageColumnFilter = {
   id: 'search' | 'read'
@@ -27,12 +28,17 @@ const columns: ColumnDef<Message>[] = [
   {
     accessorKey: 'name',
     header: 'Remetente',
-    cell: ({ row }) => (
-      <div className="flex items-center gap-2">
-        <Mail className="h-4 w-4 text-muted-foreground" />
-        <span>{row.getValue('name')}</span>
-      </div>
-    )
+    cell: ({ row }) => {
+      const mensagem = row.original
+      return (
+        <Link href={`/admin/${mensagem.id}`}>
+          <div className="flex items-center gap-2">
+            <Mail className="h-4 w-4 text-muted-foreground" />
+            <span>{mensagem.name}</span>
+          </div>
+        </Link>
+      )
+    }
   },
   {
     accessorKey: 'email',
@@ -140,7 +146,7 @@ export default function MessageTable({ messages }: MessageTableProps) {
   })
 
   const handleStatusFilter = (value: string) => {
-    setColumnFilters(prev => 
+    setColumnFilters(prev =>
       prev.filter(f => f.id !== 'read').concat(
         value === 'all' ? [] : { id: 'read', value: value === 'read' }
       )

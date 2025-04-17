@@ -88,7 +88,7 @@ export default function DataTable<TData, TValue>({
   return (
     <div className={`space-y-4 ${className}`}>
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 m-1">
           <Input
             placeholder="Filtrar..."
             value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
