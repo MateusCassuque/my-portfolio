@@ -26,6 +26,7 @@ export default function PortfolioPage() {
   const isTitleInView = useInView(titleRef, { once: true, margin: "-100px" })
 
   const [repos, setRepos] = useState<GitHubRepo[]>([])
+  const [reposFrance, setReposFrance] = useState<GitHubRepo[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -35,7 +36,9 @@ export default function PortfolioPage() {
         const response = await fetch('/api/github')
         if (!response.ok) throw new Error('Failed to fetch')
         const data = await response.json()
-        setRepos(data)
+        console.log(data)
+        setRepos(data.meteusRepo)
+        setReposFrance(data.francelina)
       } catch (err) {
         setError('Failed to load projects')
         console.error(err)
@@ -86,6 +89,63 @@ export default function PortfolioPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+           {reposFrance.map((repo, index) => (
+              <motion.div
+                key={repo.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="p-6 h-full flex flex-col">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
+                      <Code className="h-5 w-5 text-primary" />
+                      {repo.name}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-4">
+                      {repo.description || 'Sem descrição'}
+                    </p>
+                  </div>
+
+                  <div className="mt-4 pt-4 border-t border-border/20">
+                    <div className="flex flex-wrap gap-4 items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs px-2 py-1 bg-muted rounded-md">
+                          {repo.language || 'Vários'}
+                        </span>
+                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                          <Star className="h-4 w-4" />
+                          {/* <span>{repo.stargazers_count}</span> */}
+                        </div>
+                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                          <GitFork className="h-4 w-4" />
+                          {/* <span>{repo.forks_count}</span> */}
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        {repo.homepage && (
+                          <Button variant="outline" size="sm" asChild>
+                            <a href={repo.homepage} target="_blank">
+                              <Globe className="h-4 w-4 mr-2" />
+                              Demo
+                            </a>
+                          </Button>
+                        )}
+                        <Button size="sm" asChild>
+                          <a href={repo.html_url} target="_blank">
+                            <Code className="h-4 w-4 mr-2" />
+                            Código
+                          </a>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))} 
+
             {repos.map((repo, index) => (
               <motion.div
                 key={repo.id}
