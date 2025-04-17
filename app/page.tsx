@@ -3,7 +3,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { TypeAnimation } from 'react-type-animation'
-import { ArrowRight, Github, Linkedin, Mail, Calendar, Code, Cpu, Layers, Database, Facebook, LogIn } from 'lucide-react'
+import { Github, Linkedin, Mail, Calendar, Code, Cpu, Layers, Database, Facebook, LogIn } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -19,7 +19,7 @@ export default function Home() {
   // Verifica se os elementos estão visíveis
   const isAboutInView = useInView(aboutRef, { once: true, margin: "-100px" })
   const isPortfolioInView = useInView(portfolioRef, { once: true, margin: "-100px" })
- 
+
   return (
     <main className="min-h-screen p-8 md:p-24 bg-gradient-to-b from-background to-muted/10">
       <section className="min-h-screen max-w-6xl mx-auto grid md:grid-cols-2 gap-16 ">

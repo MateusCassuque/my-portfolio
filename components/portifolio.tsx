@@ -5,6 +5,7 @@ import { Code, Star, GitFork, Globe, Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 
 interface GitHubRepo {
   id: number
@@ -89,7 +90,7 @@ export default function PortfolioPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-           {reposFrance.map((repo, index) => (
+            {reposFrance.map((repo, index) => (
               <motion.div
                 key={repo.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -98,7 +99,7 @@ export default function PortfolioPage() {
                 whileHover={{ y: -5 }}
                 className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="p-6 h-full flex flex-col">
+                <div className="p-6  h-full flex flex-col">
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
                       <Code className="h-5 w-5 text-primary" />
@@ -144,7 +145,7 @@ export default function PortfolioPage() {
                   </div>
                 </div>
               </motion.div>
-            ))} 
+            ))}
 
             {repos.map((repo, index) => (
               <motion.div
