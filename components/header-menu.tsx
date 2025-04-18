@@ -9,7 +9,7 @@ import { useTheme } from 'next-themes'
 import { menuList } from './list/links'
 import { DropMenu } from './_dropMenu'
 
-export const Header: React.FC = () => {
+export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <header className="sticky top-0 z-50 bg-background border-b">
