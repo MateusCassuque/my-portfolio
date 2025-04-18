@@ -15,7 +15,6 @@ export default async function MessagePage({ params }: { params: { id: string } }
   return (
     <div >
       <MessageCard message={mensagem} />
-      <p>{id}</p>
     </div>
   )
 }

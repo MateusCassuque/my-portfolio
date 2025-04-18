@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { signOut, useSession } from "next-auth/react"
 import { useTheme } from 'next-themes'
-import { Sun, Moon, User, LogIn, UserCheck } from 'lucide-react'
+import { Sun, Moon, User, LogIn, UserCheck, LogOut } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
@@ -12,7 +12,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 export const DropMenu: React.FC = () => {
   const { theme, setTheme } = useTheme()
   // const { currentUser } = useUserStore()
-  const session =useSession()
+  const session = useSession()
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light')
@@ -27,11 +27,33 @@ export const DropMenu: React.FC = () => {
             <Button variant="ghost" size="icon" className="rounded-full">
               <Avatar>
                 <AvatarImage src={session.data?.user?.image ? session.data?.user.image : "/placeholder.svg"} alt="AvatarLogo" />
-                <AvatarFallback> <Sun className="w-5 h-5"/> </AvatarFallback>
+                <AvatarFallback> <Sun className="w-5 h-5" /> </AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
+            {session.data?.user?.id && (
+              <>
+                <DropdownMenuLabel>Conta</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+
+                <DropdownMenuItem>
+                  <Link href={`/admin/dashboard/`}>
+                    <div className="flex">
+                      <User className="w-10 h-10 mr-2" />
+                      {session.data?.user.name ? session.data?.user.name : 'Perfil'}
+                    </div>
+                  </Link>
+                </DropdownMenuItem>
+
+                {/* <DropdownMenuItem>
+                  <Link href={`/admin/dashboard/settings`}>Definições de usuário</Link>
+                </DropdownMenuItem> */}
+
+                <DropdownMenuItem onClick={() => signOut()}> <span className="flex"><LogOut className="w-10 h-10 mr-2" /> Sair</span> </DropdownMenuItem>
+
+              </>
+            )}
 
             <DropdownMenuLabel>Definição do Sistema</DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -39,45 +61,21 @@ export const DropMenu: React.FC = () => {
             <DropdownMenuItem onClick={toggleTheme}>
               {theme === 'light' ? (
                 <>
-                  <Moon className="w-4 h-4 mr-2" />
+                  <Moon className="w-10 h-10 mr-2" />
                   Tema Escuro
                 </>
               ) : (
                 <>
-                  <Sun className="w-4 h-4 mr-2" />
+                  <Sun className="w-10 h-10 mr-2" />
                   Tema Claro
                 </>
               )}
             </DropdownMenuItem>
-            
-            {/* <DropdownMenuItem>Settings</DropdownMenuItem> */}
-            {session.data?.user?.id && (
-              <>
-              <DropdownMenuLabel>Conta</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Link href={`/auth/dashboard/`}>
-                    <div className="flex">
-                      <User className="w-4 h-4 mr-2" />
-                      {session.data?.user.name ? session.data?.user.name : 'Perfil'}
-                    </div>
-                  </Link>
-                </DropdownMenuItem>
-
-                <DropdownMenuItem>
-                  <Link href={`/auth/dashboard/settings`}>Definições de usuário</Link>
-                </DropdownMenuItem>
-
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => signOut()}>Sair</DropdownMenuItem>
-
-              </>
-            )}
 
             {/* {!session.data?.user?.id && (
               <Link href={'/user'}>
                 <DropdownMenuItem>
-                  <LogIn className="w-4 h-4 mr-2" />
+                  <LogIn className="w-10 h-10 mr-2" />
                   Entrar
                 </DropdownMenuItem>
               </Link>
