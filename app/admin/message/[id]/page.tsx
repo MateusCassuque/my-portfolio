@@ -11,6 +11,9 @@ export default async function Component({ params }: { params: { id: string } }) 
   if (mensagem instanceof Error) return redirect('/not-found')
 
   return (
-    <MessageCard message={mensagem} />
+    <div >
+      {/* <MessageCard message={mensagem} /> */}
+      <p>MFL</p>
+    </div>
   )
 }

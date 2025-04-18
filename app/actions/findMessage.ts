@@ -10,6 +10,8 @@ export async function findMessage(id: number): Promise<IMessage | Error> {
     const mensagem = await prisma.message.findFirst({
       where: { id }
     })
+
+    console.log(mensagem)
   
     if(!mensagem) return new Error('Mensagem Não encontrada')
     

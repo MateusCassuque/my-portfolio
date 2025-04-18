@@ -31,7 +31,7 @@ const columns: ColumnDef<Message>[] = [
     cell: ({ row }) => {
       const mensagem = row.original
       return (
-        <Link href={`/admin/${mensagem.id}`}>
+        <Link href={`/admin/message/${mensagem.id}`}>
           <div className="flex items-center gap-2">
             <Mail className="h-4 w-4 text-muted-foreground" />
             <span>{mensagem.name}</span>
