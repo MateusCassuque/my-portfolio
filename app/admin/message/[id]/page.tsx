@@ -2,18 +2,20 @@
 import { findMessage } from "@/app/actions/findMessage"
 import { MessageCard } from "@/components/mensageCard"
 import { redirect } from "next/navigation"
+import { notFound } from "next/navigation"
 
 
-export default async function Component({ params }: { params: { id: string } }) {
-  const id = Number.parseInt(params.id)
-  const mensagem = await findMessage(id)
+export default async function MessagePage({ params }: { params: { id: string } }) {
+  const { id } = await params
 
-  if (mensagem instanceof Error) return redirect('/not-found')
+  const mensagem = await findMessage(Number.parseInt(id))
+
+  if (mensagem instanceof Error) notFound()
 
   return (
     <div >
-      {/* <MessageCard message={mensagem} /> */}
-      <p>MFL</p>
+      <MessageCard message={mensagem} />
+      <p>{id}</p>
     </div>
   )
 }

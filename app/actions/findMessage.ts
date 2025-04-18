@@ -11,7 +11,7 @@ export async function findMessage(id: number): Promise<IMessage | Error> {
       where: { id }
     })
 
-    console.log(mensagem)
+    // console.log(mensagem)
   
     if(!mensagem) return new Error('Mensagem Não encontrada')
     
