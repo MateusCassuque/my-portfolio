@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
-import { useTheme } from 'next-themes'
 import { menuList } from './list/links'
 import { DropMenu } from './_dropMenu'
 
