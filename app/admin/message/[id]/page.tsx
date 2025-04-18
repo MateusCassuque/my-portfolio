@@ -5,7 +5,7 @@ import { redirect } from "next/navigation"
 import { notFound } from "next/navigation"
 
 
-export default async function MessagePage({ params }: { params: { id: string } }) {
+export default async function MessagePage({ params }) {
   const { id } = await params
 
   const mensagem = await findMessage(Number.parseInt(id))
