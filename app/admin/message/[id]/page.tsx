@@ -1,7 +1,6 @@
 
 import { findMessage } from "@/app/actions/findMessage"
 import { MessageCard } from "@/components/mensageCard"
-import { redirect } from "next/navigation"
 import { notFound } from "next/navigation"
 
 
